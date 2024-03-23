@@ -2,6 +2,10 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
+url = 'http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2020/index.html'
+response = requests.get(url)
+response.encoding = 'gbk'
+html = response.text
 
 # 加载上传的Excel文件
 file_path = '/path/to/your/file.xlsx'  # 替换为实际文件路径
