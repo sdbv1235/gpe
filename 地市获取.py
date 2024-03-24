@@ -6,6 +6,17 @@ url = 'http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2020/index.html'
 response = requests.get(url)
 response.encoding = 'gbk'
 html = response.text
+# 获取到的数据存储到dataframe中
+soup = BeautifulSoup(html, 'html.parser')
+data = []
+for tr in soup.find_all('tr'):
+    tds = tr.find_all('td')
+    if len(tds) == 0:
+        continue
+    row = [td.text.strip() for td in tds]
+    data.append(row)
+df = pd.DataFrame(data)
+print(df)
 
 # 加载上传的Excel文件
 file_path = '/path/to/your/file.xlsx'  # 替换为实际文件路径
